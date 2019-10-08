@@ -1,0 +1,46 @@
+type Cliente{
+    id: ID
+    nombre: String
+    apellido: String
+    empresa: String
+    email: String
+    edad: Int
+    tipo : tipoCliente
+    pedidos: [tipoPedidos]
+}
+
+type tipoPedidos{
+    producto: String
+    precio: Int
+}
+
+enum tipoCliente{
+    BASICO
+    PREMIUM
+}
+type Query{
+    getClientes(limit:Int): [Cliente]
+    getCliente(id: ID): Cliente
+}
+
+input pedidoInput{
+    producto: String
+    precio: Int
+}
+
+input ClienteInput{
+    id: ID
+    nombre: String!
+    apellido: String!
+    empresa: String!
+    email: String!
+    edad: Int!
+    tipo: tipoCliente!
+    pedidos: [pedidoInput]
+}
+
+type Mutation{
+    """ Esto no lo voy a usar"""
+    createCliente(input: ClienteInput) : Cliente
+    actualizarCliente(input: ClienteInput) : Cliente
+}
